@@ -12,12 +12,19 @@ public class TestPostalRateCalculator {
 
 	private static final String source = "H3G2X1";
 	private static final String destination1 = "K1M0V7";
+	private static final String destination2 = "S0A1A0";
+	private static final String destination3 = "Y0B1G0";
 	
 	@Test
 	public void validInputTest1_Regular() {
-		
 		// from the lookup table
 		assertEquals(10.73, PostalRateCalculator.calculateParcelRate(source, destination1, 0.1, 0.07, 0.01, 0.15, regular), 0);
+	}
+	
+	@Test
+	public void validInputTest2_Regular() {
+		// from the lookup table
+		assertEquals(23.14, PostalRateCalculator.calculateParcelRate(source, destination2, 0.1, 0.7, 0.1, 2.5, regular), 0);
 	}
 
 }
