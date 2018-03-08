@@ -32,5 +32,11 @@ public class TestPostalRateCalculator {
 		// from the lookup table
 		assertEquals(51.00, PostalRateCalculator.calculateParcelRate(source, destination3, 0.1, 0.7, 0.1, 17.69, regular), 0);
 	}
+	
+	@Test
+	public void validInputTest4_Regular() {
+		// from the lookup table
+		assertEquals(25.30, PostalRateCalculator.calculateParcelRate(source, destination1, 0.1, 0.7, 0.1, 17.69, regular), 0);
+	}
 
 }
