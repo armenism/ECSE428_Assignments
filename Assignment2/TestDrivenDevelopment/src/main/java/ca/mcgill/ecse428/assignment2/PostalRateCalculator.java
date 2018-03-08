@@ -46,13 +46,27 @@ public class PostalRateCalculator {
 			e.printStackTrace();
 		}
 
+		int type = 0;
+		// determine where to start looking in the sheet
+		switch(postType.trim().toLowerCase()) {
+		case "regular":
+			type = regularTypeRow;
+			break;
+		case "xpress":
+			type = xpressTypeRow;
+			break;
+		case "priority":
+			type = priorityTypeRow;
+			break;
+		}
+		
 		// find the rate code from the postal codes
 		String rateCode = findRateCode(source, destination);
 
 		// go through the corresponding rows and compare the weight
-		for (int row = regularTypeRow; row <= regularTypeRow + typeRange; row++) {
+		for (int row = type; row <= type + typeRange; row++) {
 			if (Double.parseDouble(rateSheet.getRow(row).getCell(0).toString()) >= weight) {
-				return getParcelRate(rateCode, row, regularTypeRow);
+				return getParcelRate(rateCode, row, type);
 			}
 		}
 		// if no matches, then return 0
