@@ -68,5 +68,11 @@ public class TestPostalRateCalculator {
 		// from the lookup table
 		assertEquals(173.12, PostalRateCalculator.calculateParcelRate(source, destination2, 0.1, 0.7, 0.1, 15.77, priority), 0);
 	}
+	
+	@Test
+	public void validInputTest10_Priority() {
+		// from the lookup table
+		assertEquals(176.48, PostalRateCalculator.calculateParcelRate(source, destination3, 0.1, 0.7, 0.1, 15.77, priority), 0);
+	}
 
 }
