@@ -46,7 +46,7 @@ public class TestPostalRateCalculator {
 	private static final String errorInvalidSyntaxDestination = "Invalid destination syntax - The destination postal code must be in format A8A 8A8";
 	private static final String errorNullInput = "One or more than one of the inputs has been left blank!";
 	
-		@Test
+	@Test
 	public void validInputTest1_Regular() {
 		// from the lookup table
 		assertEquals(10.73, PostalRateCalculator.calculateParcelRate(source, destination1, 10, 7, 1, 0.15, regular), 0);

@@ -2,6 +2,7 @@ package ca.mcgill.ecse428.assignment2;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
@@ -21,7 +22,7 @@ public class PostalRateCalculator {
 	private static final int typeRange = 59;
 
 	public static void main(String[] args) throws IOException {
-		
+
 		String source, destination, postType;
 		double length, width, height, weight;
 
@@ -31,32 +32,37 @@ public class PostalRateCalculator {
 		} catch (InvalidFormatException | IOException e) {
 			e.printStackTrace();
 		}
-		
-		Scanner scanner = new Scanner(System.in);
 
-		System.out.print("Enter source postal code: ");
-		source = scanner.nextLine();
-		System.out.print("Enter destination postal code: ");
-		destination = scanner.nextLine();
-		System.out.print("Enter postal delivery type (regular/xpress/priority): ");
-		postType = scanner.nextLine();
-		System.out.print("Enter parcel length(CM): ");
-		length = scanner.nextDouble();
-		System.out.print("Enter parcel width(CM): ");
-		width = scanner.nextDouble();
-		System.out.print("Enter parcel height(CM): ");
-		height = scanner.nextDouble();
-		System.out.print("Enter parcel weight(KG): ");
-		weight = scanner.nextDouble();
-		
-		// Check for the input validity
-		checkParameters(source, destination, length, width, height, weight, postType);
+		try {
+			Scanner scanner = new Scanner(System.in);
 
-		// Output the rate of the parcel
-		System.out.println("\nThe rate for the given postal delivery is "
-				+ calculateParcelRate(source, destination, length, width, height, weight, postType));
-		
-		scanner.close();
+			System.out.print("Enter source postal code: ");
+			source = scanner.nextLine();
+			System.out.print("Enter destination postal code: ");
+			destination = scanner.nextLine();
+			System.out.print("Enter postal delivery type (regular/xpress/priority): ");
+			postType = scanner.nextLine();
+			System.out.print("Enter parcel length(CM): ");
+			length = scanner.nextDouble();
+			System.out.print("Enter parcel width(CM): ");
+			width = scanner.nextDouble();
+			System.out.print("Enter parcel height(CM): ");
+			height = scanner.nextDouble();
+			System.out.print("Enter parcel weight(KG): ");
+			weight = scanner.nextDouble();
+
+			// Check for the input validity
+			checkParameters(source, destination, length, width, height, weight, postType);
+
+			// Output the rate of the parcel
+			System.out.println("\nThe rate for the given postal delivery is "
+					+ calculateParcelRate(source, destination, length, width, height, weight, postType));
+
+			scanner.close();
+		} catch (InputMismatchException e) {
+			System.out.println("There was an input mismatch! Please enter a numerical value");
+			System.exit(1);
+		}
 	}
 
 	/**
